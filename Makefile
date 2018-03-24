@@ -56,12 +56,13 @@ astyle:
 
 cache-test:  $(TESTS)
 	echo 3 | sudo tee /proc/sys/vm/drop_caches;
-	perf stat --repeat 100 \
-                -e cache-misses,cache-references,instructions,cycles \
-                ./test_cpy --bench $(TEST_DATA)
-	perf stat --repeat 100 \
+	perf stat --repeat 1000 \
                 -e cache-misses,cache-references,instructions,cycles \
 				./test_ref --bench $(TEST_DATA)
+	# perf stat --repeat 1000 \
+    #             -e cache-misses,cache-references,instructions,cycles \
+    #             ./test_cpy --bench $(TEST_DATA)
+	
 
 
 clean:
